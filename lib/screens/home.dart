@@ -108,6 +108,9 @@ class TodoListBody extends StatelessWidget {
                       .update(item.copyWith(completed: value == true));
                 },
               ),
+              onTap: () {
+                TodoEditRoute(id: item.id).push(context);
+              },
             )
         ],
       ).toList(),

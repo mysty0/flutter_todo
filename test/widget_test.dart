@@ -127,4 +127,45 @@ void main() {
       ).called(1);
     });
   });
+
+  group("Edit test", () {
+    Future<void> pumpCreate(WidgetTester tester) async {
+      final listCubit = TodoListCubit(repository);
+      await listCubit.refresh();
+      await tester.pumpWidget(
+        BlocProvider(
+          create: (_) => listCubit,
+          child: MaterialApp(home: EditScreen(id: "123".hashCode)),
+        ),
+      );
+    }
+
+    testWidgets("correct title", (WidgetTester tester) async {
+      await pumpCreate(tester);
+      await tester.pump(const Duration());
+
+      expect(find.text("Edit TODO"), findsOneWidget);
+      expect(find.widgetWithText(TextField, "123"), findsOneWidget);
+    });
+
+    testWidgets("create new item", (WidgetTester tester) async {
+      await pumpCreate(tester);
+      await tester.pump(const Duration());
+
+      await tester.enterText(find.byType(TextField), '1234');
+      final createButton = find.bySemanticsLabel("Save");
+      expect(createButton, findsOneWidget);
+      await tester.tap(createButton);
+
+      verify(
+            () => repository.updateItem(
+            '123',
+            const TodoUpdateRequest(
+              title: "1234",
+              completed: false,
+              order: 2,
+            )),
+      ).called(1);
+    });
+  });
 }
