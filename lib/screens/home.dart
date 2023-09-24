@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/bloc/auth.dart';
 import 'package:todo/bloc/todo_list.dart';
 import 'package:todo/routes/routes.dart';
 
@@ -50,12 +51,27 @@ class HomeScreen extends StatelessWidget {
         IconButton(
           onPressed: () {
             showDialog(
-                context: context,
-                builder: (context) => const RemoveAllDialog()).then((value) {
+              context: context,
+              builder: (context) => const RemoveAllDialog(),
+            ).then((value) {
               if (value == true) context.read<TodoListCubit>().deleteAll();
             });
           },
           icon: const Icon(Icons.delete_sweep_rounded),
+        ),
+        IconButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) => const ResetAuthDialog(),
+            ).then((value) {
+              if (value == true) {
+                context.read<AuthCubit>().reset();
+                const AuthSetupRoute().go(context);
+              };
+            });
+          },
+          icon: const Icon(Icons.restart_alt),
         ),
       ],
       drawer: Container(),
@@ -154,6 +170,28 @@ class RemoveAllDialog extends StatelessWidget {
         TextButton(
           onPressed: () => Navigator.pop(context, true),
           child: const Text('Remove all'),
+        ),
+      ],
+    );
+  }
+}
+
+class ResetAuthDialog extends StatelessWidget {
+  const ResetAuthDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Reset authentication?'),
+      content: const Text('Reconfirm authentication will be required'),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.pop(context, false),
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, true),
+          child: const Text('Reset'),
         ),
       ],
     );
