@@ -9,7 +9,7 @@ class TodoItem with _$TodoItem {
   const factory TodoItem({
     required String url,
     required String title,
-    required bool? competed,
+    required bool? completed,
     required int? order,
   }) = _TodoItem;
 
@@ -31,9 +31,9 @@ class TodoCreateRequest with _$TodoCreateRequest {
 @freezed
 class TodoUpdateRequest with _$TodoUpdateRequest {
   const factory TodoUpdateRequest({
-    required String title,
-    required bool completed,
-    required int order,
+    String? title,
+    bool? completed,
+    int? order,
   }) = _TodoUpdateRequest;
 
   factory TodoUpdateRequest.fromJson(Map<String, dynamic> json) =>

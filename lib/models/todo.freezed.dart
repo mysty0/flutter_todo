@@ -22,7 +22,7 @@ TodoItem _$TodoItemFromJson(Map<String, dynamic> json) {
 mixin _$TodoItem {
   String get url => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  bool? get competed => throw _privateConstructorUsedError;
+  bool? get completed => throw _privateConstructorUsedError;
   int? get order => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $TodoItemCopyWith<$Res> {
   factory $TodoItemCopyWith(TodoItem value, $Res Function(TodoItem) then) =
       _$TodoItemCopyWithImpl<$Res, TodoItem>;
   @useResult
-  $Res call({String url, String title, bool? competed, int? order});
+  $Res call({String url, String title, bool? completed, int? order});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$TodoItemCopyWithImpl<$Res, $Val extends TodoItem>
   $Res call({
     Object? url = null,
     Object? title = null,
-    Object? competed = freezed,
+    Object? completed = freezed,
     Object? order = freezed,
   }) {
     return _then(_value.copyWith(
@@ -66,9 +66,9 @@ class _$TodoItemCopyWithImpl<$Res, $Val extends TodoItem>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      competed: freezed == competed
-          ? _value.competed
-          : competed // ignore: cast_nullable_to_non_nullable
+      completed: freezed == completed
+          ? _value.completed
+          : completed // ignore: cast_nullable_to_non_nullable
               as bool?,
       order: freezed == order
           ? _value.order
@@ -85,7 +85,7 @@ abstract class _$$_TodoItemCopyWith<$Res> implements $TodoItemCopyWith<$Res> {
       __$$_TodoItemCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String url, String title, bool? competed, int? order});
+  $Res call({String url, String title, bool? completed, int? order});
 }
 
 /// @nodoc
@@ -101,7 +101,7 @@ class __$$_TodoItemCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
     Object? title = null,
-    Object? competed = freezed,
+    Object? completed = freezed,
     Object? order = freezed,
   }) {
     return _then(_$_TodoItem(
@@ -113,9 +113,9 @@ class __$$_TodoItemCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      competed: freezed == competed
-          ? _value.competed
-          : competed // ignore: cast_nullable_to_non_nullable
+      completed: freezed == completed
+          ? _value.completed
+          : completed // ignore: cast_nullable_to_non_nullable
               as bool?,
       order: freezed == order
           ? _value.order
@@ -131,7 +131,7 @@ class _$_TodoItem with DiagnosticableTreeMixin implements _TodoItem {
   const _$_TodoItem(
       {required this.url,
       required this.title,
-      required this.competed,
+      required this.completed,
       required this.order});
 
   factory _$_TodoItem.fromJson(Map<String, dynamic> json) =>
@@ -142,13 +142,13 @@ class _$_TodoItem with DiagnosticableTreeMixin implements _TodoItem {
   @override
   final String title;
   @override
-  final bool? competed;
+  final bool? completed;
   @override
   final int? order;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TodoItem(url: $url, title: $title, competed: $competed, order: $order)';
+    return 'TodoItem(url: $url, title: $title, completed: $completed, order: $order)';
   }
 
   @override
@@ -158,7 +158,7 @@ class _$_TodoItem with DiagnosticableTreeMixin implements _TodoItem {
       ..add(DiagnosticsProperty('type', 'TodoItem'))
       ..add(DiagnosticsProperty('url', url))
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('competed', competed))
+      ..add(DiagnosticsProperty('completed', completed))
       ..add(DiagnosticsProperty('order', order));
   }
 
@@ -169,14 +169,14 @@ class _$_TodoItem with DiagnosticableTreeMixin implements _TodoItem {
             other is _$_TodoItem &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.competed, competed) ||
-                other.competed == competed) &&
+            (identical(other.completed, completed) ||
+                other.completed == completed) &&
             (identical(other.order, order) || other.order == order));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, url, title, competed, order);
+  int get hashCode => Object.hash(runtimeType, url, title, completed, order);
 
   @JsonKey(ignore: true)
   @override
@@ -196,7 +196,7 @@ abstract class _TodoItem implements TodoItem {
   const factory _TodoItem(
       {required final String url,
       required final String title,
-      required final bool? competed,
+      required final bool? completed,
       required final int? order}) = _$_TodoItem;
 
   factory _TodoItem.fromJson(Map<String, dynamic> json) = _$_TodoItem.fromJson;
@@ -206,7 +206,7 @@ abstract class _TodoItem implements TodoItem {
   @override
   String get title;
   @override
-  bool? get competed;
+  bool? get completed;
   @override
   int? get order;
   @override
@@ -387,9 +387,9 @@ TodoUpdateRequest _$TodoUpdateRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TodoUpdateRequest {
-  String get title => throw _privateConstructorUsedError;
-  bool get completed => throw _privateConstructorUsedError;
-  int get order => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  bool? get completed => throw _privateConstructorUsedError;
+  int? get order => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -403,7 +403,7 @@ abstract class $TodoUpdateRequestCopyWith<$Res> {
           TodoUpdateRequest value, $Res Function(TodoUpdateRequest) then) =
       _$TodoUpdateRequestCopyWithImpl<$Res, TodoUpdateRequest>;
   @useResult
-  $Res call({String title, bool completed, int order});
+  $Res call({String? title, bool? completed, int? order});
 }
 
 /// @nodoc
@@ -419,23 +419,23 @@ class _$TodoUpdateRequestCopyWithImpl<$Res, $Val extends TodoUpdateRequest>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
-    Object? completed = null,
-    Object? order = null,
+    Object? title = freezed,
+    Object? completed = freezed,
+    Object? order = freezed,
   }) {
     return _then(_value.copyWith(
-      title: null == title
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      completed: null == completed
+              as String?,
+      completed: freezed == completed
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
-              as bool,
-      order: null == order
+              as bool?,
+      order: freezed == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -448,7 +448,7 @@ abstract class _$$_TodoUpdateRequestCopyWith<$Res>
       __$$_TodoUpdateRequestCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, bool completed, int order});
+  $Res call({String? title, bool? completed, int? order});
 }
 
 /// @nodoc
@@ -462,23 +462,23 @@ class __$$_TodoUpdateRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
-    Object? completed = null,
-    Object? order = null,
+    Object? title = freezed,
+    Object? completed = freezed,
+    Object? order = freezed,
   }) {
     return _then(_$_TodoUpdateRequest(
-      title: null == title
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      completed: null == completed
+              as String?,
+      completed: freezed == completed
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
-              as bool,
-      order: null == order
+              as bool?,
+      order: freezed == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -488,18 +488,17 @@ class __$$_TodoUpdateRequestCopyWithImpl<$Res>
 class _$_TodoUpdateRequest
     with DiagnosticableTreeMixin
     implements _TodoUpdateRequest {
-  const _$_TodoUpdateRequest(
-      {required this.title, required this.completed, required this.order});
+  const _$_TodoUpdateRequest({this.title, this.completed, this.order});
 
   factory _$_TodoUpdateRequest.fromJson(Map<String, dynamic> json) =>
       _$$_TodoUpdateRequestFromJson(json);
 
   @override
-  final String title;
+  final String? title;
   @override
-  final bool completed;
+  final bool? completed;
   @override
-  final int order;
+  final int? order;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -548,19 +547,19 @@ class _$_TodoUpdateRequest
 
 abstract class _TodoUpdateRequest implements TodoUpdateRequest {
   const factory _TodoUpdateRequest(
-      {required final String title,
-      required final bool completed,
-      required final int order}) = _$_TodoUpdateRequest;
+      {final String? title,
+      final bool? completed,
+      final int? order}) = _$_TodoUpdateRequest;
 
   factory _TodoUpdateRequest.fromJson(Map<String, dynamic> json) =
       _$_TodoUpdateRequest.fromJson;
 
   @override
-  String get title;
+  String? get title;
   @override
-  bool get completed;
+  bool? get completed;
   @override
-  int get order;
+  int? get order;
   @override
   @JsonKey(ignore: true)
   _$$_TodoUpdateRequestCopyWith<_$_TodoUpdateRequest> get copyWith =>

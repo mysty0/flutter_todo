@@ -20,24 +20,73 @@ class MockRepository extends Mock implements TodoRepository {}
 void main() {
   late MockRepository repository;
 
-  setUp(() {
-    repository = MockRepository();
-    when(repository.fetchTodoList).thenAnswer((invocation) async => [
-          const TodoItem(url: "123", title: "123", competed: false, order: 2),
-          const TodoItem(url: "321", title: "321", competed: true, order: 1),
-        ]);
+  setUpAll(() {
+    registerFallbackValue(const TodoUpdateRequest());
   });
 
-  testWidgets("Home screen test", (WidgetTester tester) async {
-    await tester.pumpWidget(
-      BlocProvider(
-        create: (_) => TodoListCubit(repository),
-        child: const MaterialApp(home: HomeScreen()),
-      ),
-    );
-    await tester.pump();
+  setUp(() {
+    repository = MockRepository();
+    when(() => repository.fetchTodoList()).thenAnswer((invocation) async => [
+          const TodoItem(url: "123", title: "123", completed: false, order: 2),
+          const TodoItem(url: "321", title: "321", completed: true, order: 1),
+        ]);
 
-    expect(find.text('123'), findsOneWidget);
-    expect(find.text('321'), findsOneWidget);
+    when(() => repository.updateItem(any(), any())).thenAnswer(
+      (invocation) async =>
+          const TodoItem(url: "123", title: "123", completed: false, order: 2),
+    );
+  });
+
+  group("Home screen test", () {
+    Future<void> pumpHome(WidgetTester tester) async {
+      final cubit = TodoListCubit(repository);
+      await cubit.refresh();
+      await tester.pumpWidget(
+        BlocProvider(
+          create: (_) => cubit,
+          child: const MaterialApp(home: HomeScreen()),
+        ),
+      );
+    }
+
+    void checkTile(String title, bool checked) {
+      final text = find.text(title);
+      expect(text, findsOneWidget);
+      final ancestor = find.ancestor(of: text, matching: find.byType(ListTile));
+      final checkbox = find.descendant(
+          of: ancestor,
+          matching: find
+              .byWidgetPredicate((w) => w is Checkbox && w.value == checked));
+      expect(checkbox, findsOneWidget);
+    }
+
+    testWidgets("Home test display", (WidgetTester tester) async {
+      await pumpHome(tester);
+      await tester.pump();
+
+      checkTile('123', false);
+      checkTile('321', true);
+    });
+
+    testWidgets("Home test complete", (WidgetTester tester) async {
+      await pumpHome(tester);
+      await tester.pump();
+
+      final checkbox =
+          find.byWidgetPredicate((w) => w is Checkbox && w.value != true);
+      await tester.tap(checkbox);
+      await tester.pump();
+
+      checkTile('123', true);
+      verify(
+        () => repository.updateItem(
+            '123',
+            const TodoUpdateRequest(
+              title: "123",
+              completed: true,
+              order: 2,
+            )),
+      ).called(1);
+    });
   });
 }

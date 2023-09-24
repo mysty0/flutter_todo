@@ -4,8 +4,21 @@ import 'package:todo/bloc/todo_list.dart';
 import 'package:todo/repositories/todo.dart';
 import 'package:todo/screens/home.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  final repository = TodoRepository();
+  final todoCubit = TodoListCubit(repository);
+
+  await todoCubit.refresh();
+
+  runApp(
+    RepositoryProvider(
+      create: (BuildContext context) => repository,
+      child: BlocProvider(
+        create: (BuildContext context) => todoCubit,
+        child: const MyApp(),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,17 +30,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
-        useMaterial3: true,
-      ),
-      home: RepositoryProvider(
-        create: (BuildContext context) => TodoRepository(),
-        child: BlocProvider(
-            create: (BuildContext context) => TodoListCubit(
-                  context.read<TodoRepository>(),
-                ),
-            child: const HomeScreen()),
-      ),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.purple,
+            brightness: Brightness.dark,
+          ),
+          useMaterial3: true,
+          brightness: Brightness.dark),
+      home: const HomeScreen(),
     );
   }
 }

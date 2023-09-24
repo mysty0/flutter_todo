@@ -9,19 +9,36 @@ import '../models/todo.dart';
 part 'todo_list.freezed.dart';
 
 @freezed
-class TodoListState with _$TodoListState {
-  const factory TodoListState.loading() = TodoListStateLoading;
-  const factory TodoListState.data(
-      List<TodoItem> items, TodoItem? recentlyDeleted) = TodoListStateData;
-  const factory TodoListState.error(String error) = TodoListStateError;
+class TodoState with _$TodoState {
+  const factory TodoState({
+    required List<TodoItem> items,
+    required TodoItem? recentlyDeleted,
+  }) = _TodoState;
 }
 
-class TodoListCubit extends Cubit<TodoListState> {
+class TodoListCubit extends Cubit<TodoState> {
   final TodoRepository _apiRepository;
 
-  TodoListCubit(this._apiRepository) : super(const TodoListState.loading()) {
-    _apiRepository
-        .fetchTodoList()
-        .then((items) => emit(TodoListState.data(items, null)));
+  TodoListCubit(this._apiRepository)
+      : super(const TodoState(items: [], recentlyDeleted: null));
+
+  void _emitNewList(List<TodoItem> items) {
+    emit(TodoState(items: items, recentlyDeleted: state.recentlyDeleted));
+  }
+
+  Future<void> refresh() {
+    return _apiRepository.fetchTodoList().then(_emitNewList);
+  }
+
+  void update(TodoItem item) {
+    _emitNewList(state.items.map((e) => e.url == item.url ? item : e).toList());
+    _apiRepository.updateItem(
+      item.url,
+      TodoUpdateRequest(
+        title: item.title,
+        completed: item.completed,
+        order: item.order,
+      ),
+    );
   }
 }

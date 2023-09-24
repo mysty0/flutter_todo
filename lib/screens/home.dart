@@ -22,13 +22,9 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Expanded(
-                child: BlocBuilder<TodoListCubit, TodoListState>(
+                child: BlocBuilder<TodoListCubit, TodoState>(
                   builder: (context, state) {
-                    return state.when(
-                      loading: () => const CircularProgressIndicator(),
-                      data: (items, _) => TodoListBody(items: items),
-                      error: (error) => TodoListError(error: error),
-                    );
+                    return TodoListBody(items: state.items);
                   },
                 ),
               )
@@ -84,8 +80,12 @@ class TodoListBody extends StatelessWidget {
           ListTile(
             title: Text(item.title),
             trailing: Checkbox(
-              value: item.competed ?? false,
-              onChanged: (bool? value) {},
+              value: item.completed ?? false,
+              onChanged: (bool? value) {
+                context
+                    .read<TodoListCubit>()
+                    .update(item.copyWith(completed: value == true));
+              },
             ),
           )
       ],
