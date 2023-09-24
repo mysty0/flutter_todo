@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/bloc/todo_list.dart';
+import 'package:todo/routes/routes.dart';
 
 import '../models/todo.dart';
 
@@ -16,6 +17,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 10),
               Text(
                 "TODO List",
                 style: Theme.of(context).textTheme.headlineMedium,
@@ -32,6 +34,22 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          const TodoNewRoute().push(context);
+        },
+        child: Icon(
+          Icons.add,
+          size: 30,
+          color: Theme.of(context).iconTheme.color,
+        ),
+      ),
+      persistentFooterAlignment: AlignmentDirectional.centerStart,
+      persistentFooterButtons: [
+        IconButton(onPressed: () {}, icon: const Icon(Icons.delete_sweep_rounded)),
+      ],
+      drawer: Container(),
     );
   }
 }
@@ -75,20 +93,24 @@ class TodoListBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [
-        for (final item in items)
-          ListTile(
-            title: Text(item.title),
-            trailing: Checkbox(
-              value: item.completed ?? false,
-              onChanged: (bool? value) {
-                context
-                    .read<TodoListCubit>()
-                    .update(item.copyWith(completed: value == true));
-              },
-            ),
-          )
-      ],
+      children: ListTile.divideTiles(
+        context: context,
+        tiles: [
+          for (final item in items)
+            ListTile(
+              title: Text(item.title),
+              subtitle: Text("Order: ${item.order}"),
+              trailing: Checkbox(
+                value: item.completed ?? false,
+                onChanged: (bool? value) {
+                  context
+                      .read<TodoListCubit>()
+                      .update(item.copyWith(completed: value == true));
+                },
+              ),
+            )
+        ],
+      ).toList(),
     );
   }
 }

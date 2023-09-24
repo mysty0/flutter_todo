@@ -9,10 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:todo/bloc/edit.dart';
 import 'package:todo/bloc/todo_list.dart';
 
 import 'package:todo/models/todo.dart';
 import 'package:todo/repositories/todo.dart';
+import 'package:todo/screens/edit.dart';
 import 'package:todo/screens/home.dart';
 
 class MockRepository extends Mock implements TodoRepository {}
@@ -86,6 +88,42 @@ void main() {
               completed: true,
               order: 2,
             )),
+      ).called(1);
+    });
+  });
+
+  group("Create test", () {
+    Future<void> pumpCreate(WidgetTester tester) async {
+      final listCubit = TodoListCubit(repository);
+      await listCubit.refresh();
+      await tester.pumpWidget(
+        BlocProvider(
+          create: (_) => listCubit,
+          child: const MaterialApp(home: EditScreen(id: null)),
+        ),
+      );
+    }
+
+    testWidgets("correct title", (WidgetTester tester) async {
+      await pumpCreate(tester);
+      await tester.pump(const Duration());
+
+      expect(find.text("Create new TODO"), findsOneWidget);
+    });
+
+    testWidgets("create new item", (WidgetTester tester) async {
+      await pumpCreate(tester);
+      await tester.pump(const Duration());
+
+      await tester.enterText(find.byType(TextField), '123');
+      final createButton = find.bySemanticsLabel("Create");
+      expect(createButton, findsOneWidget);
+      await tester.tap(createButton);
+
+      verify(
+        () => repository.addItem(
+          const TodoCreateRequest(title: '123', order: 0),
+        ),
       ).called(1);
     });
   });

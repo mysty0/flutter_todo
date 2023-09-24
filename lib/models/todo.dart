@@ -12,6 +12,9 @@ class TodoItem with _$TodoItem {
     required bool? completed,
     required int? order,
   }) = _TodoItem;
+  const TodoItem._();
+
+  int get id => url.hashCode;
 
   factory TodoItem.fromJson(Map<String, dynamic> json) =>
       _$TodoItemFromJson(json);

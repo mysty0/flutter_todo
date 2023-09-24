@@ -127,12 +127,13 @@ class __$$_TodoItemCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TodoItem with DiagnosticableTreeMixin implements _TodoItem {
+class _$_TodoItem extends _TodoItem with DiagnosticableTreeMixin {
   const _$_TodoItem(
       {required this.url,
       required this.title,
       required this.completed,
-      required this.order});
+      required this.order})
+      : super._();
 
   factory _$_TodoItem.fromJson(Map<String, dynamic> json) =>
       _$$_TodoItemFromJson(json);
@@ -192,12 +193,13 @@ class _$_TodoItem with DiagnosticableTreeMixin implements _TodoItem {
   }
 }
 
-abstract class _TodoItem implements TodoItem {
+abstract class _TodoItem extends TodoItem {
   const factory _TodoItem(
       {required final String url,
       required final String title,
       required final bool? completed,
       required final int? order}) = _$_TodoItem;
+  const _TodoItem._() : super._();
 
   factory _TodoItem.fromJson(Map<String, dynamic> json) = _$_TodoItem.fromJson;
 

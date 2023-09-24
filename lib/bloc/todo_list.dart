@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:todo/extensions/iterable.dart';
 import 'package:todo/repositories/todo.dart';
 
 import '../models/todo.dart';
@@ -26,13 +27,15 @@ class TodoListCubit extends Cubit<TodoState> {
     emit(TodoState(items: items, recentlyDeleted: state.recentlyDeleted));
   }
 
+  TodoItem? getById(int id) => state.items.firstWhereOrNull((e) => e.id == id);
+
   Future<void> refresh() {
     return _apiRepository.fetchTodoList().then(_emitNewList);
   }
 
-  void update(TodoItem item) {
+  Future<void> update(TodoItem item) async {
     _emitNewList(state.items.map((e) => e.url == item.url ? item : e).toList());
-    _apiRepository.updateItem(
+    await _apiRepository.updateItem(
       item.url,
       TodoUpdateRequest(
         title: item.title,
@@ -40,5 +43,10 @@ class TodoListCubit extends Cubit<TodoState> {
         order: item.order,
       ),
     );
+  }
+
+  Future<void> addItem(String text, int order) async {
+    final newTodo = await _apiRepository.addItem(TodoCreateRequest(title: text, order: order));
+    _emitNewList(state.items.toList()..add(newTodo));
   }
 }

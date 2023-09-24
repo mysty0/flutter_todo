@@ -18,4 +18,8 @@ class TodoRepository {
   Future<TodoItem> updateItem(String url, TodoUpdateRequest req) => _dio
       .patch(url, data: req.toJson())
       .then((value) => TodoItem.fromJson(value.data));
+
+  Future<TodoItem> addItem(TodoCreateRequest req) => _dio
+      .post(_apiUrl(), data: req.toJson())
+      .then((value) => TodoItem.fromJson(value.data));
 }
