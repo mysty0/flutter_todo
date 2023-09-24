@@ -78,32 +78,33 @@ class AuthPinSetupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => PinSetupFormBloc(context.read<AuthCubit>()),
-      child: Builder(
-        builder: (context) {
-          final formBloc = BlocProvider.of<PinSetupFormBloc>(context);
-          return FormBlocListener<PinSetupFormBloc, String, String>(
-            onSuccess: (_, __) {
-              const HomeRoute().go(context);
-            },
-            child: AuthScreenWrapper(title: "Setup pin", children: [
-              TextFieldBlocBuilder(
-                textFieldBloc: formBloc.pin,
-                decoration: const InputDecoration(labelText: "Pin"),
-                obscureText: true,
-              ),
-              const SizedBox(height: 10),
-              TextFieldBlocBuilder(
-                textFieldBloc: formBloc.confirmPin,
-                decoration: const InputDecoration(labelText: "Confirm pin"),
-                obscureText: true,
-              ),
-              const SizedBox(height: 20),
-              FilledButton(onPressed: () => formBloc.submit(), child: const Text("Set pin")),
-            ]),
-          );
-        }
-      ),
+      create: (BuildContext context) =>
+          PinSetupFormBloc(context.read<AuthCubit>()),
+      child: Builder(builder: (context) {
+        final formBloc = BlocProvider.of<PinSetupFormBloc>(context);
+        return FormBlocListener<PinSetupFormBloc, String, String>(
+          onSuccess: (_, __) {
+            const HomeRoute().go(context);
+          },
+          child: AuthScreenWrapper(title: "Setup pin", children: [
+            TextFieldBlocBuilder(
+              textFieldBloc: formBloc.pin,
+              decoration: const InputDecoration(labelText: "Pin"),
+              obscureText: true,
+            ),
+            const SizedBox(height: 10),
+            TextFieldBlocBuilder(
+              textFieldBloc: formBloc.confirmPin,
+              decoration: const InputDecoration(labelText: "Confirm pin"),
+              obscureText: true,
+            ),
+            const SizedBox(height: 20),
+            FilledButton(
+                onPressed: () => formBloc.submit(),
+                child: const Text("Set pin")),
+          ]),
+        );
+      }),
     );
   }
 }
@@ -114,26 +115,27 @@ class AuthPinConfirmScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => PinConfirmFormBloc(context.read<AuthCubit>()),
-      child: Builder(
-          builder: (context) {
-            final formBloc = BlocProvider.of<PinConfirmFormBloc>(context);
-            return FormBlocListener<PinConfirmFormBloc, String, String>(
-              onSuccess: (_, __) {
-                const HomeRoute().go(context);
-              },
-              child: AuthScreenWrapper(title: "Authorize with pin", children: [
-                TextFieldBlocBuilder(
-                  textFieldBloc: formBloc.pin,
-                  decoration: const InputDecoration(labelText: "Pin"),
-                  obscureText: true,
-                ),
-                const SizedBox(height: 20),
-                FilledButton(onPressed: () => formBloc.submit(), child: const Text("Authorize")),
-              ]),
-            );
-          }
-      ),
+      create: (BuildContext context) =>
+          PinConfirmFormBloc(context.read<AuthCubit>()),
+      child: Builder(builder: (context) {
+        final formBloc = BlocProvider.of<PinConfirmFormBloc>(context);
+        return FormBlocListener<PinConfirmFormBloc, String, String>(
+          onSuccess: (_, __) {
+            const HomeRoute().go(context);
+          },
+          child: AuthScreenWrapper(title: "Authorize with pin", children: [
+            TextFieldBlocBuilder(
+              textFieldBloc: formBloc.pin,
+              decoration: const InputDecoration(labelText: "Pin"),
+              obscureText: true,
+            ),
+            const SizedBox(height: 20),
+            FilledButton(
+                onPressed: () => formBloc.submit(),
+                child: const Text("Authorize")),
+          ]),
+        );
+      }),
     );
   }
 }
@@ -143,7 +145,20 @@ class AuthBiometricsConfirmScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return AuthScreenWrapper(title: "Biometric authorization", children: [
+      FilledButton(
+        onPressed: () {
+          context
+              .read<AuthCubit>()
+              .authenticateWithBiometrics()
+              .then((success) {
+            if (success) {
+              const HomeRoute().go(context);
+            }
+          });
+        },
+        child: const Text("Authorize"),
+      ),
+    ]);
   }
 }

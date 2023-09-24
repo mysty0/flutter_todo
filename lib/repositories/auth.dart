@@ -36,7 +36,8 @@ class AuthRepository {
     try {
       return await auth.authenticate(
           localizedReason: "Please authenticate to show account balance");
-    } on PlatformException {
+    } on PlatformException catch (e) {
+      print(e);
       return false;
     }
   }
@@ -55,10 +56,6 @@ class AuthRepository {
   }
 
   Future<bool> setupBiometrics() async {
-    if (settings?.type != AuthType.biometrics) {
-      return false;
-    }
-
     if (!await authenticateWithBiometrics()) {
       return false;
     }

@@ -20,16 +20,19 @@ class TodoState with _$TodoState {
   }) = _TodoState;
   const TodoState._();
 
+  List<TodoItem> get sortedItems =>
+      items.toList()..sort((a, b) => (a.order ?? 0).compareTo(b.order ?? 0));
+
   List<TodoItem> get filteredItems {
-    if(filters.isEmpty) {
-      return items;
+    if (filters.isEmpty) {
+      return sortedItems;
     }
 
-    return items
-      .where((item) => item.completed == true
-      ? filters.contains(FilterType.completed)
-      : filters.contains(FilterType.uncompleted))
-      .toList();
+    return sortedItems
+        .where((item) => item.completed == true
+            ? filters.contains(FilterType.completed)
+            : filters.contains(FilterType.uncompleted))
+        .toList();
   }
 }
 
@@ -80,7 +83,7 @@ class TodoListCubit extends Cubit<TodoState> {
   }
 
   void toggleFilter(FilterType filter) {
-    if(state.filters.contains(filter)) {
+    if (state.filters.contains(filter)) {
       emit(state.copyWith(filters: state.filters.toSet()..remove(filter)));
     } else {
       emit(state.copyWith(filters: state.filters.toSet()..add(filter)));
