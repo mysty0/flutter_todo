@@ -5,17 +5,17 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:todo/bloc/edit.dart';
-import 'package:todo/bloc/todo_list.dart';
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_test/flutter_test.dart";
+import "package:mocktail/mocktail.dart";
+import "package:todo/bloc/edit.dart";
+import "package:todo/bloc/todo_list.dart";
 
-import 'package:todo/models/todo.dart';
-import 'package:todo/repositories/todo.dart';
-import 'package:todo/screens/edit.dart';
-import 'package:todo/screens/home.dart';
+import "package:todo/models/todo.dart";
+import "package:todo/repositories/todo.dart";
+import "package:todo/screens/edit.dart";
+import "package:todo/screens/home.dart";
 
 class MockRepository extends Mock implements TodoRepository {}
 
@@ -70,8 +70,8 @@ void main() {
       await pumpHome(tester);
       await tester.pump();
 
-      checkTile('123', false);
-      checkTile('321', true);
+      checkTile("123", false);
+      checkTile("321", true);
     });
 
     testWidgets("Home test complete", (WidgetTester tester) async {
@@ -83,10 +83,10 @@ void main() {
       await tester.tap(checkbox);
       await tester.pump();
 
-      checkTile('123', true);
+      checkTile("123", true);
       verify(
         () => repository.updateItem(
-            '123',
+            "123",
             const TodoUpdateRequest(
               title: "123",
               completed: true,
@@ -136,14 +136,14 @@ void main() {
       await pumpCreate(tester);
       await tester.pump(const Duration());
 
-      await tester.enterText(find.byType(TextField), '123');
+      await tester.enterText(find.byType(TextField), "123");
       final createButton = find.bySemanticsLabel("Create");
       expect(createButton, findsOneWidget);
       await tester.tap(createButton);
 
       verify(
         () => repository.addItem(
-          const TodoCreateRequest(title: '123', order: 0),
+          const TodoCreateRequest(title: "123", order: 0),
         ),
       ).called(1);
     });
@@ -173,14 +173,14 @@ void main() {
       await pumpCreate(tester);
       await tester.pump(const Duration());
 
-      await tester.enterText(find.byType(TextField), '1234');
+      await tester.enterText(find.byType(TextField), "1234");
       final createButton = find.bySemanticsLabel("Save");
       expect(createButton, findsOneWidget);
       await tester.tap(createButton);
 
       verify(
         () => repository.updateItem(
-            '123',
+            "123",
             const TodoUpdateRequest(
               title: "1234",
               completed: false,
@@ -198,7 +198,7 @@ void main() {
 
       verify(
         () => repository.deleteItem(
-          '123',
+          "123",
         ),
       ).called(1);
     });
