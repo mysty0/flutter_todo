@@ -1,12 +1,12 @@
-import 'package:bloc/bloc.dart';
-import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:todo/bloc/todo_list.dart';
+import "package:bloc/bloc.dart";
+import "package:flutter_form_bloc/flutter_form_bloc.dart";
+import "package:todo/bloc/todo_list.dart";
 
-import '../models/todo.dart';
-import 'package:flutter/foundation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import "../models/todo.dart";
+import "package:flutter/foundation.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-part 'edit.freezed.dart';
+part "edit.freezed.dart";
 
 @freezed
 class EditState with _$EditState {

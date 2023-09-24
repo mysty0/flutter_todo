@@ -1,13 +1,13 @@
-import 'package:bloc/bloc.dart';
+import "package:bloc/bloc.dart";
 
-import 'package:flutter/foundation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:todo/extensions/iterable.dart';
-import 'package:todo/repositories/todo.dart';
+import "package:flutter/foundation.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
+import "package:todo/extensions/iterable.dart";
+import "package:todo/repositories/todo.dart";
 
-import '../models/todo.dart';
+import "../models/todo.dart";
 
-part 'todo_list.freezed.dart';
+part "todo_list.freezed.dart";
 
 enum FilterType { completed, uncompleted }
 

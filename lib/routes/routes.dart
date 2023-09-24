@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:todo/screens/auth.dart';
-import 'package:todo/screens/home.dart';
+import "package:flutter/material.dart";
+import "package:go_router/go_router.dart";
+import "package:todo/screens/auth.dart";
+import "package:todo/screens/home.dart";
 
-import '../screens/edit.dart';
+import "../screens/edit.dart";
 
-part 'routes.g.dart';
+part "routes.g.dart";
 
-@TypedGoRoute<HomeRoute>(path: '/')
+@TypedGoRoute<HomeRoute>(path: "/")
 class HomeRoute extends GoRouteData {
   const HomeRoute();
 
@@ -15,7 +15,7 @@ class HomeRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => const HomeScreen();
 }
 
-@TypedGoRoute<TodoNewRoute>(path: '/new')
+@TypedGoRoute<TodoNewRoute>(path: "/new")
 class TodoNewRoute extends GoRouteData {
   const TodoNewRoute();
 
@@ -25,7 +25,7 @@ class TodoNewRoute extends GoRouteData {
 }
 
 
-@TypedGoRoute<TodoEditRoute>(path: '/todo/:id')
+@TypedGoRoute<TodoEditRoute>(path: "/todo/:id")
 class TodoEditRoute extends GoRouteData {
   const TodoEditRoute({required this.id});
   final int id;
@@ -34,7 +34,7 @@ class TodoEditRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => EditScreen(id: id);
 }
 
-@TypedGoRoute<AuthSetupRoute>(path: '/auth/setup')
+@TypedGoRoute<AuthSetupRoute>(path: "/auth/setup")
 class AuthSetupRoute extends GoRouteData {
   const AuthSetupRoute();
 
@@ -42,7 +42,7 @@ class AuthSetupRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => AuthSetupScreen();
 }
 
-@TypedGoRoute<AuthPinSetupRoute>(path: '/auth/pin/setup')
+@TypedGoRoute<AuthPinSetupRoute>(path: "/auth/pin/setup")
 class AuthPinSetupRoute extends GoRouteData {
   const AuthPinSetupRoute();
 
@@ -50,7 +50,7 @@ class AuthPinSetupRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => AuthPinSetupScreen();
 }
 
-@TypedGoRoute<AuthPinConfirmRoute>(path: '/auth/pin/confirm')
+@TypedGoRoute<AuthPinConfirmRoute>(path: "/auth/pin/confirm")
 class AuthPinConfirmRoute extends GoRouteData {
   const AuthPinConfirmRoute();
 
@@ -58,7 +58,7 @@ class AuthPinConfirmRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => AuthPinConfirmScreen();
 }
 
-@TypedGoRoute<AuthBiometricsConfirmRoute>(path: '/auth/biometrics')
+@TypedGoRoute<AuthBiometricsConfirmRoute>(path: "/auth/biometrics")
 class AuthBiometricsConfirmRoute extends GoRouteData {
   const AuthBiometricsConfirmRoute();
 

@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/bloc/auth.dart';
-import 'package:todo/bloc/todo_list.dart';
-import 'package:todo/routes/routes.dart';
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:todo/bloc/auth.dart";
+import "package:todo/bloc/todo_list.dart";
+import "package:todo/routes/routes.dart";
 
-import '../models/todo.dart';
+import "../models/todo.dart";
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -208,16 +208,16 @@ class RemoveAllDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Remove all todos?'),
-      content: const Text('All todos will be removed'),
+      title: const Text("Remove all todos?"),
+      content: const Text("All todos will be removed"),
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.pop(context, false),
-          child: const Text('Cancel'),
+          child: const Text("Cancel"),
         ),
         TextButton(
           onPressed: () => Navigator.pop(context, true),
-          child: const Text('Remove all'),
+          child: const Text("Remove all"),
         ),
       ],
     );
@@ -230,16 +230,16 @@ class ResetAuthDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Reset authentication?'),
-      content: const Text('Reconfirm authentication will be required'),
+      title: const Text("Reset authentication?"),
+      content: const Text("Reconfirm authentication will be required"),
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.pop(context, false),
-          child: const Text('Cancel'),
+          child: const Text("Cancel"),
         ),
         TextButton(
           onPressed: () => Navigator.pop(context, true),
-          child: const Text('Reset'),
+          child: const Text("Reset"),
         ),
       ],
     );

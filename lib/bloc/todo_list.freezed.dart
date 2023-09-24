@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'todo_list.dart';
+part of "todo_list.dart";
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,7 +12,7 @@ part of 'todo_list.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    "It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods");
 
 /// @nodoc
 mixin _$TodoState {
@@ -48,7 +48,7 @@ class _$TodoStateCopyWithImpl<$Res, $Val extends TodoState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  @pragma('vm:prefer-inline')
+  @pragma("vm:prefer-inline")
   @override
   $Res call({
     Object? items = null,
@@ -72,7 +72,7 @@ class _$TodoStateCopyWithImpl<$Res, $Val extends TodoState>
   }
 
   @override
-  @pragma('vm:prefer-inline')
+  @pragma("vm:prefer-inline")
   $TodoItemCopyWith<$Res>? get recentlyDeleted {
     if (_value.recentlyDeleted == null) {
       return null;
@@ -108,7 +108,7 @@ class __$$_TodoStateCopyWithImpl<$Res>
       _$_TodoState _value, $Res Function(_$_TodoState) _then)
       : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
+  @pragma("vm:prefer-inline")
   @override
   $Res call({
     Object? items = null,
@@ -164,17 +164,17 @@ class _$_TodoState extends _TodoState with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TodoState(items: $items, filters: $filters, recentlyDeleted: $recentlyDeleted)';
+    return "TodoState(items: $items, filters: $filters, recentlyDeleted: $recentlyDeleted)";
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'TodoState'))
-      ..add(DiagnosticsProperty('items', items))
-      ..add(DiagnosticsProperty('filters', filters))
-      ..add(DiagnosticsProperty('recentlyDeleted', recentlyDeleted));
+      ..add(DiagnosticsProperty("type", "TodoState"))
+      ..add(DiagnosticsProperty("items", items))
+      ..add(DiagnosticsProperty("filters", filters))
+      ..add(DiagnosticsProperty("recentlyDeleted", recentlyDeleted));
   }
 
   @override
@@ -197,7 +197,7 @@ class _$_TodoState extends _TodoState with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
+  @pragma("vm:prefer-inline")
   _$$_TodoStateCopyWith<_$_TodoState> get copyWith =>
       __$$_TodoStateCopyWithImpl<_$_TodoState>(this, _$identity);
 }

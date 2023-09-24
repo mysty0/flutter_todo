@@ -1,6 +1,6 @@
-import 'package:hive/hive.dart';
+import "package:hive/hive.dart";
 
-part 'auth.g.dart';
+part "auth.g.dart";
 
 @HiveType(typeId: 1)
 enum AuthType {

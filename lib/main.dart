@@ -1,17 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:local_auth/local_auth.dart';
-import 'package:todo/bloc/auth.dart';
-import 'package:todo/bloc/todo_list.dart';
-import 'package:todo/repositories/auth.dart';
-import 'package:todo/repositories/todo.dart';
-import 'package:todo/routes/routes.dart';
-import 'package:todo/screens/home.dart';
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:go_router/go_router.dart";
+import "package:hive/hive.dart";
+import "package:hive_flutter/adapters.dart";
+import "package:local_auth/local_auth.dart";
+import "package:todo/bloc/auth.dart";
+import "package:todo/bloc/todo_list.dart";
+import "package:todo/repositories/auth.dart";
+import "package:todo/repositories/todo.dart";
+import "package:todo/routes/routes.dart";
+import "package:todo/screens/home.dart";
 
-import 'models/auth.dart';
+import "models/auth.dart";
 
 String initialRouteFromSettings(AuthSettings? settings) {
   if(settings == null || !settings.enabled) return const AuthSetupRoute().location;
@@ -29,7 +29,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(AuthSettingsAdapter());
   Hive.registerAdapter(AuthTypeAdapter());
-  await Hive.openBox<AuthSettings>('auth');
+  await Hive.openBox<AuthSettings>("auth");
 
   final authRepository = AuthRepository();
   authRepository.initStore();
@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: "Flutter Demo",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.purple,

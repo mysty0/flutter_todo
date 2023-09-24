@@ -1,13 +1,13 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:bloc/bloc.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:todo/models/auth.dart';
-import 'package:todo/repositories/auth.dart';
+import "package:bloc/bloc.dart";
+import "package:flutter/foundation.dart";
+import "package:flutter_form_bloc/flutter_form_bloc.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
+import "package:todo/models/auth.dart";
+import "package:todo/repositories/auth.dart";
 
-part 'auth.freezed.dart';
+part "auth.freezed.dart";
 
 @freezed
 class AuthState with _$AuthState {
@@ -82,7 +82,7 @@ class PinSetupFormBloc extends FormBloc<String, String> {
       if (confirmPassword == pinTextFieldBloc.value) {
         return null;
       }
-      return 'Pin should be equal';
+      return "Pin should be equal";
     };
   }
 

@@ -1,15 +1,15 @@
-import 'dart:convert';
+import "dart:convert";
 
-import 'package:crypto/crypto.dart';
-import 'package:flutter/services.dart';
-import 'package:hive/hive.dart';
-import 'package:local_auth/local_auth.dart';
+import "package:crypto/crypto.dart";
+import "package:flutter/services.dart";
+import "package:hive/hive.dart";
+import "package:local_auth/local_auth.dart";
 
-import '../models/auth.dart';
+import "../models/auth.dart";
 
 class AuthRepository {
   final auth = LocalAuthentication();
-  final box = Hive.box<AuthSettings>('auth');
+  final box = Hive.box<AuthSettings>("auth");
 
   AuthSettings? get settings => box.getAt(0);
 
@@ -35,7 +35,7 @@ class AuthRepository {
   Future<bool> authenticateWithBiometrics() async {
     try {
       return await auth.authenticate(
-          localizedReason: 'Please authenticate to show account balance');
+          localizedReason: "Please authenticate to show account balance");
     } on PlatformException {
       return false;
     }
