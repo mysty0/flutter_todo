@@ -22,4 +22,7 @@ class TodoRepository {
   Future<TodoItem> addItem(TodoCreateRequest req) => _dio
       .post(_apiUrl(), data: req.toJson())
       .then((value) => TodoItem.fromJson(value.data));
+
+  Future<void> deleteAll() => _dio
+      .delete(_apiUrl());
 }

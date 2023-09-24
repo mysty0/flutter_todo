@@ -10,6 +10,7 @@ class EditScreen extends StatelessWidget {
     super.key,
     required this.id,
   });
+
   final int? id;
 
   @override
@@ -27,9 +28,11 @@ class EditScreen extends StatelessWidget {
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: FormBlocListener<EditFormBloc, String, String>(onSuccess: (_, __) {
-                Navigator.of(context).pop();
-              }, child: EditScreenContent(id: id)),
+              child: FormBlocListener<EditFormBloc, String, String>(
+                  onSuccess: (_, __) {
+                    Navigator.of(context).pop();
+                  },
+                  child: EditScreenContent(id: id)),
             ),
           ),
         ),
@@ -73,37 +76,56 @@ class EditScreenContent extends StatelessWidget {
           divisions: 100,
         ),
         const Spacer(),
-        BlocBuilder<EditCubit, EditState>(
-          builder: (context, state) {
-            if (state.loading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text("Cancel"),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  flex: 3,
-                  child: FilledButton(
-                    onPressed: () {
-                      formBloc.submit();
-                    },
-                    child: Text(id == null ? "Create" : "Save"),
-                  ),
-                ),
-              ],
-            );
-          },
-        )
+        _BottomButtons(
+          formBloc: formBloc,
+          newItem: id == null,
+        ),
       ],
+    );
+  }
+}
+
+class _BottomButtons extends StatelessWidget {
+  const _BottomButtons({
+    super.key,
+    required this.formBloc,
+    required this.newItem,
+  });
+
+  final EditFormBloc formBloc;
+  final bool newItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<EditCubit, EditState>(
+      builder: (context, state) {
+        if (state.loading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: OutlinedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Cancel"),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              flex: 3,
+              child: FilledButton(
+                onPressed: () {
+                  formBloc.submit();
+                },
+                child: Text(newItem ? "Create" : "Save"),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

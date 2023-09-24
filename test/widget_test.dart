@@ -37,6 +37,8 @@ void main() {
       (invocation) async =>
           const TodoItem(url: "123", title: "123", completed: false, order: 2),
     );
+
+    when(() => repository.deleteAll()).thenAnswer((invocation) async => {});
   });
 
   group("Home screen test", () {
@@ -88,6 +90,23 @@ void main() {
               completed: true,
               order: 2,
             )),
+      ).called(1);
+    });
+
+    testWidgets("Home test delete all", (WidgetTester tester) async {
+      await pumpHome(tester);
+      await tester.pump();
+
+      await tester.tap(find.byIcon(Icons.delete_sweep_rounded));
+      await tester.pump();
+
+      expect(find.text("Remove all todos?"), findsOneWidget);
+
+      await tester.tap(find.text("Remove all"));
+      await tester.pump();
+
+      verify(
+        () => repository.deleteAll(),
       ).called(1);
     });
   });
@@ -158,7 +177,7 @@ void main() {
       await tester.tap(createButton);
 
       verify(
-            () => repository.updateItem(
+        () => repository.updateItem(
             '123',
             const TodoUpdateRequest(
               title: "1234",

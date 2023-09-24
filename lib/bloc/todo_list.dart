@@ -49,4 +49,9 @@ class TodoListCubit extends Cubit<TodoState> {
     final newTodo = await _apiRepository.addItem(TodoCreateRequest(title: text, order: order));
     _emitNewList(state.items.toList()..add(newTodo));
   }
+
+  void deleteAll() {
+    emit(state.copyWith(items: []));
+    _apiRepository.deleteAll();
+  }
 }

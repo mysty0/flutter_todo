@@ -47,7 +47,16 @@ class HomeScreen extends StatelessWidget {
       ),
       persistentFooterAlignment: AlignmentDirectional.centerStart,
       persistentFooterButtons: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.delete_sweep_rounded)),
+        IconButton(
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) => const RemoveAllDialog()).then((value) {
+              if (value == true) context.read<TodoListCubit>().deleteAll();
+            });
+          },
+          icon: const Icon(Icons.delete_sweep_rounded),
+        ),
       ],
       drawer: Container(),
     );
@@ -95,25 +104,58 @@ class TodoListBody extends StatelessWidget {
     return ListView(
       children: ListTile.divideTiles(
         context: context,
-        tiles: [
-          for (final item in items)
-            ListTile(
-              title: Text(item.title),
-              subtitle: Text("Order: ${item.order}"),
-              trailing: Checkbox(
-                value: item.completed ?? false,
-                onChanged: (bool? value) {
-                  context
-                      .read<TodoListCubit>()
-                      .update(item.copyWith(completed: value == true));
-                },
-              ),
-              onTap: () {
-                TodoEditRoute(id: item.id).push(context);
-              },
-            )
-        ],
+        tiles: [for (final item in items) TodoTile(item: item)],
       ).toList(),
+    );
+  }
+}
+
+class TodoTile extends StatelessWidget {
+  const TodoTile({
+    super.key,
+    required this.item,
+  });
+
+  final TodoItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(item.title),
+      subtitle: Text("Order: ${item.order}"),
+      trailing: Checkbox(
+        value: item.completed ?? false,
+        onChanged: (bool? value) {
+          context
+              .read<TodoListCubit>()
+              .update(item.copyWith(completed: value == true));
+        },
+      ),
+      onTap: () {
+        TodoEditRoute(id: item.id).push(context);
+      },
+    );
+  }
+}
+
+class RemoveAllDialog extends StatelessWidget {
+  const RemoveAllDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Remove all todos?'),
+      content: const Text('All todos will be removed'),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.pop(context, false),
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, true),
+          child: const Text('Remove all'),
+        ),
+      ],
     );
   }
 }
