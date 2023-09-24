@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                 child: BlocBuilder<TodoListCubit, TodoState>(
                   builder: (context, state) {
-                    return TodoListBody(items: state.items);
+                    return TodoListBody(items: state.filteredItems);
                   },
                 ),
               )
@@ -68,7 +68,8 @@ class HomeScreen extends StatelessWidget {
               if (value == true) {
                 context.read<AuthCubit>().reset();
                 const AuthSetupRoute().go(context);
-              };
+              }
+              ;
             });
           },
           icon: const Icon(Icons.restart_alt),
@@ -117,11 +118,58 @@ class TodoListBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: ListTile.divideTiles(
-        context: context,
-        tiles: [for (final item in items) TodoTile(item: item)],
-      ).toList(),
+    return Column(
+      children: [
+        BlocBuilder<TodoListCubit, TodoState>(builder: (context, state) {
+          return Row(
+            children: [
+              TodoFilterChip(
+                state: state,
+                title: "Completed",
+                type: FilterType.completed,
+              ),
+              const SizedBox(width: 10),
+              TodoFilterChip(
+                state: state,
+                title: "Uncompleted",
+                type: FilterType.uncompleted,
+              )
+            ],
+          );
+        }),
+        Expanded(
+          child: ListView(
+            children: ListTile.divideTiles(
+              context: context,
+              tiles: [for (final item in items) TodoTile(item: item)],
+            ).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class TodoFilterChip extends StatelessWidget {
+  const TodoFilterChip({
+    super.key,
+    required this.state,
+    required this.title,
+    required this.type,
+  });
+
+  final TodoState state;
+  final String title;
+  final FilterType type;
+
+  @override
+  Widget build(BuildContext context) {
+    return FilterChip(
+      label: Text(title),
+      onSelected: (bool value) {
+        context.read<TodoListCubit>().toggleFilter(type);
+      },
+      selected: state.filters.contains(type),
     );
   }
 }

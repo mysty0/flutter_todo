@@ -9,25 +9,43 @@ import '../models/todo.dart';
 
 part 'todo_list.freezed.dart';
 
+enum FilterType { completed, uncompleted }
+
 @freezed
 class TodoState with _$TodoState {
   const factory TodoState({
     required List<TodoItem> items,
+    required Set<FilterType> filters,
     required TodoItem? recentlyDeleted,
   }) = _TodoState;
+  const TodoState._();
+
+  List<TodoItem> get filteredItems {
+    if(filters.isEmpty) {
+      return items;
+    }
+
+    return items
+      .where((item) => item.completed == true
+      ? filters.contains(FilterType.completed)
+      : filters.contains(FilterType.uncompleted))
+      .toList();
+  }
 }
 
 class TodoListCubit extends Cubit<TodoState> {
   final TodoRepository _apiRepository;
 
   TodoListCubit(this._apiRepository)
-      : super(const TodoState(items: [], recentlyDeleted: null));
+      : super(const TodoState(items: [], recentlyDeleted: null, filters: {}));
 
   void _emitNewList(List<TodoItem> items) {
-    emit(TodoState(items: items, recentlyDeleted: state.recentlyDeleted));
+    emit(state.copyWith(items: items));
   }
 
-  TodoItem? getById(int id) => state.items.firstWhereOrNull((e) => e.id == id);
+  TodoItem? getById(int id) {
+    return state.items.firstWhereOrNull((e) => e.id == id);
+  }
 
   Future<void> refresh() {
     return _apiRepository.fetchTodoList().then(_emitNewList);
@@ -46,7 +64,8 @@ class TodoListCubit extends Cubit<TodoState> {
   }
 
   Future<void> addItem(String text, int order) async {
-    final newTodo = await _apiRepository.addItem(TodoCreateRequest(title: text, order: order));
+    final newTodo = await _apiRepository
+        .addItem(TodoCreateRequest(title: text, order: order));
     _emitNewList(state.items.toList()..add(newTodo));
   }
 
@@ -58,5 +77,13 @@ class TodoListCubit extends Cubit<TodoState> {
   void deleteAll() {
     emit(state.copyWith(items: []));
     _apiRepository.deleteAll();
+  }
+
+  void toggleFilter(FilterType filter) {
+    if(state.filters.contains(filter)) {
+      emit(state.copyWith(filters: state.filters.toSet()..remove(filter)));
+    } else {
+      emit(state.copyWith(filters: state.filters.toSet()..add(filter)));
+    }
   }
 }
