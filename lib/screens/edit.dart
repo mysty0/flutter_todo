@@ -52,14 +52,24 @@ class EditScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formBloc = BlocProvider.of<EditFormBloc>(context);
+    final isNewItem = id == null;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
-        Text(
-          id == null ? "Create new TODO" : "Edit TODO",
-          style: Theme.of(context).textTheme.headlineMedium,
+        Row(
+          children: [
+            Text(
+              isNewItem ? "Create new TODO" : "Edit TODO",
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const Spacer(),
+            if(!isNewItem) IconButton(icon: const Icon(Icons.delete), onPressed: () {
+              context.read<EditCubit>().delete();
+              Navigator.of(context).pop();
+            }),
+          ],
         ),
         const SizedBox(height: 10),
         TextFieldBlocBuilder(
@@ -78,7 +88,7 @@ class EditScreenContent extends StatelessWidget {
         const Spacer(),
         _BottomButtons(
           formBloc: formBloc,
-          newItem: id == null,
+          newItem: isNewItem,
         ),
       ],
     );

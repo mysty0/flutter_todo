@@ -25,4 +25,7 @@ class TodoRepository {
 
   Future<void> deleteAll() => _dio
       .delete(_apiUrl());
+
+  Future<void> deleteItem(String url) => _dio
+      .delete(url);
 }

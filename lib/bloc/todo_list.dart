@@ -50,6 +50,11 @@ class TodoListCubit extends Cubit<TodoState> {
     _emitNewList(state.items.toList()..add(newTodo));
   }
 
+  Future<void> deleteItem(TodoItem item) async {
+    _emitNewList(state.items.where((e) => e.url != item.url).toList());
+    await _apiRepository.deleteItem(item.url);
+  }
+
   void deleteAll() {
     emit(state.copyWith(items: []));
     _apiRepository.deleteAll();

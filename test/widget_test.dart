@@ -39,6 +39,8 @@ void main() {
     );
 
     when(() => repository.deleteAll()).thenAnswer((invocation) async => {});
+    when(() => repository.deleteItem(any()))
+        .thenAnswer((invocation) async => {});
   });
 
   group("Home screen test", () {
@@ -184,6 +186,20 @@ void main() {
               completed: false,
               order: 2,
             )),
+      ).called(1);
+    });
+
+    testWidgets("delete", (WidgetTester tester) async {
+      await pumpCreate(tester);
+      await tester.pump(const Duration());
+
+      await tester.tap(find.byIcon(Icons.delete));
+      await tester.pump();
+
+      verify(
+        () => repository.deleteItem(
+          '123',
+        ),
       ).called(1);
     });
   });

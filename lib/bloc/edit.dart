@@ -37,6 +37,12 @@ class EditCubit extends Cubit<EditState> {
     }
     emit(state.copyWith(loading: false));
   }
+
+  void delete() {
+    if(state.editingItem != null) {
+      _todoList.deleteItem(state.editingItem!);
+    }
+  }
 }
 
 class EditFormBloc extends FormBloc<String, String> {
