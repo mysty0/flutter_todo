@@ -1,6 +1,15 @@
-# todo
+# TODO List App
 
-Todo list
+
+
+Features:
+
+- Use following backend: "https://csharp-todo-backend.azurewebsites.net/api/v1/todo/
+- List, edit, create and delete todos
+- Filters
+- Pin or biometric authentication
+- Pin is hashed with SHA256
+- Tests
 
 To run an app:
 ```sh
