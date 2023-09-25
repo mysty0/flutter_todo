@@ -4,6 +4,7 @@ import "package:todo/screens/auth.dart";
 import "package:todo/screens/home.dart";
 
 import "../screens/edit.dart";
+import "../screens/error.dart";
 
 part "routes.g.dart";
 
@@ -23,7 +24,6 @@ class TodoNewRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) =>
       const EditScreen(id: null);
 }
-
 
 @TypedGoRoute<TodoEditRoute>(path: "/todo/:id")
 class TodoEditRoute extends GoRouteData {
@@ -47,7 +47,8 @@ class AuthPinSetupRoute extends GoRouteData {
   const AuthPinSetupRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) => AuthPinSetupScreen();
+  Widget build(BuildContext context, GoRouterState state) =>
+      AuthPinSetupScreen();
 }
 
 @TypedGoRoute<AuthPinConfirmRoute>(path: "/auth/pin/confirm")
@@ -55,7 +56,8 @@ class AuthPinConfirmRoute extends GoRouteData {
   const AuthPinConfirmRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) => AuthPinConfirmScreen();
+  Widget build(BuildContext context, GoRouterState state) =>
+      AuthPinConfirmScreen();
 }
 
 @TypedGoRoute<AuthBiometricsConfirmRoute>(path: "/auth/biometrics")
@@ -63,6 +65,19 @@ class AuthBiometricsConfirmRoute extends GoRouteData {
   const AuthBiometricsConfirmRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) => AuthBiometricsConfirmScreen();
+  Widget build(BuildContext context, GoRouterState state) =>
+      AuthBiometricsConfirmScreen();
 }
 
+@TypedGoRoute<ErrorRoute>(path: "/error")
+class ErrorRoute extends GoRouteData {
+  const ErrorRoute(this.error, this.nextRoute);
+  final String error;
+  final String nextRoute;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => ErrorScreen(
+        error: error,
+        nextRoute: nextRoute,
+      );
+}

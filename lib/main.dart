@@ -1,3 +1,4 @@
+import "package:dio/dio.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:go_router/go_router.dart";
@@ -38,10 +39,16 @@ void main() async {
   final todoRepository = TodoRepository();
   final todoCubit = TodoListCubit(todoRepository);
 
-  await todoCubit.refresh();
+  var nextRoute = initialRouteFromSettings(authRepository.settings);
+
+  try {
+    await todoCubit.refresh();
+  } on DioException catch(e) {
+    nextRoute = ErrorRoute(e.toString(), nextRoute).location;
+  }
 
   final router = GoRouter(
-    initialLocation: initialRouteFromSettings(authRepository.settings),
+    initialLocation: nextRoute,
     routes: $appRoutes,
   );
 

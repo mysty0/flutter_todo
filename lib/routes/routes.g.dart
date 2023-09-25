@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of "routes.dart";
+part of 'routes.dart';
 
 // **************************************************************************
 // GoRouterGenerator
@@ -14,10 +14,11 @@ List<RouteBase> get $appRoutes => [
       $authPinSetupRoute,
       $authPinConfirmRoute,
       $authBiometricsConfirmRoute,
+      $errorRoute,
     ];
 
 RouteBase get $homeRoute => GoRouteData.$route(
-      path: "/",
+      path: '/',
       factory: $HomeRouteExtension._fromState,
     );
 
@@ -25,7 +26,7 @@ extension $HomeRouteExtension on HomeRoute {
   static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
 
   String get location => GoRouteData.$location(
-        "/",
+        '/',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -39,7 +40,7 @@ extension $HomeRouteExtension on HomeRoute {
 }
 
 RouteBase get $todoNewRoute => GoRouteData.$route(
-      path: "/new",
+      path: '/new',
       factory: $TodoNewRouteExtension._fromState,
     );
 
@@ -47,7 +48,7 @@ extension $TodoNewRouteExtension on TodoNewRoute {
   static TodoNewRoute _fromState(GoRouterState state) => const TodoNewRoute();
 
   String get location => GoRouteData.$location(
-        "/new",
+        '/new',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -61,17 +62,17 @@ extension $TodoNewRouteExtension on TodoNewRoute {
 }
 
 RouteBase get $todoEditRoute => GoRouteData.$route(
-      path: "/todo/:id",
+      path: '/todo/:id',
       factory: $TodoEditRouteExtension._fromState,
     );
 
 extension $TodoEditRouteExtension on TodoEditRoute {
   static TodoEditRoute _fromState(GoRouterState state) => TodoEditRoute(
-        id: int.parse(state.pathParameters["id"]!),
+        id: int.parse(state.pathParameters['id']!),
       );
 
   String get location => GoRouteData.$location(
-        "/todo/${Uri.encodeComponent(id.toString())}",
+        '/todo/${Uri.encodeComponent(id.toString())}',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -85,7 +86,7 @@ extension $TodoEditRouteExtension on TodoEditRoute {
 }
 
 RouteBase get $authSetupRoute => GoRouteData.$route(
-      path: "/auth/setup",
+      path: '/auth/setup',
       factory: $AuthSetupRouteExtension._fromState,
     );
 
@@ -94,7 +95,7 @@ extension $AuthSetupRouteExtension on AuthSetupRoute {
       const AuthSetupRoute();
 
   String get location => GoRouteData.$location(
-        "/auth/setup",
+        '/auth/setup',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -108,7 +109,7 @@ extension $AuthSetupRouteExtension on AuthSetupRoute {
 }
 
 RouteBase get $authPinSetupRoute => GoRouteData.$route(
-      path: "/auth/pin/setup",
+      path: '/auth/pin/setup',
       factory: $AuthPinSetupRouteExtension._fromState,
     );
 
@@ -117,7 +118,7 @@ extension $AuthPinSetupRouteExtension on AuthPinSetupRoute {
       const AuthPinSetupRoute();
 
   String get location => GoRouteData.$location(
-        "/auth/pin/setup",
+        '/auth/pin/setup',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -131,7 +132,7 @@ extension $AuthPinSetupRouteExtension on AuthPinSetupRoute {
 }
 
 RouteBase get $authPinConfirmRoute => GoRouteData.$route(
-      path: "/auth/pin/confirm",
+      path: '/auth/pin/confirm',
       factory: $AuthPinConfirmRouteExtension._fromState,
     );
 
@@ -140,7 +141,7 @@ extension $AuthPinConfirmRouteExtension on AuthPinConfirmRoute {
       const AuthPinConfirmRoute();
 
   String get location => GoRouteData.$location(
-        "/auth/pin/confirm",
+        '/auth/pin/confirm',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -154,7 +155,7 @@ extension $AuthPinConfirmRouteExtension on AuthPinConfirmRoute {
 }
 
 RouteBase get $authBiometricsConfirmRoute => GoRouteData.$route(
-      path: "/auth/biometrics",
+      path: '/auth/biometrics',
       factory: $AuthBiometricsConfirmRouteExtension._fromState,
     );
 
@@ -163,7 +164,36 @@ extension $AuthBiometricsConfirmRouteExtension on AuthBiometricsConfirmRoute {
       const AuthBiometricsConfirmRoute();
 
   String get location => GoRouteData.$location(
-        "/auth/biometrics",
+        '/auth/biometrics',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $errorRoute => GoRouteData.$route(
+      path: '/error',
+      factory: $ErrorRouteExtension._fromState,
+    );
+
+extension $ErrorRouteExtension on ErrorRoute {
+  static ErrorRoute _fromState(GoRouterState state) => ErrorRoute(
+        state.uri.queryParameters['error']!,
+        state.uri.queryParameters['next-route']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/error',
+        queryParams: {
+          'error': error,
+          'next-route': nextRoute,
+        },
       );
 
   void go(BuildContext context) => context.go(location);

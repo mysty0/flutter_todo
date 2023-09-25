@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of "todo.dart";
+part of 'todo.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,7 +12,7 @@ part of "todo.dart";
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    "It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods");
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 TodoItem _$TodoItemFromJson(Map<String, dynamic> json) {
   return _TodoItem.fromJson(json);
@@ -49,7 +49,7 @@ class _$TodoItemCopyWithImpl<$Res, $Val extends TodoItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? url = null,
@@ -96,7 +96,7 @@ class __$$_TodoItemCopyWithImpl<$Res>
       _$_TodoItem _value, $Res Function(_$_TodoItem) _then)
       : super(_value, _then);
 
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? url = null,
@@ -149,18 +149,18 @@ class _$_TodoItem extends _TodoItem with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return "TodoItem(url: $url, title: $title, completed: $completed, order: $order)";
+    return 'TodoItem(url: $url, title: $title, completed: $completed, order: $order)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "TodoItem"))
-      ..add(DiagnosticsProperty("url", url))
-      ..add(DiagnosticsProperty("title", title))
-      ..add(DiagnosticsProperty("completed", completed))
-      ..add(DiagnosticsProperty("order", order));
+      ..add(DiagnosticsProperty('type', 'TodoItem'))
+      ..add(DiagnosticsProperty('url', url))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('completed', completed))
+      ..add(DiagnosticsProperty('order', order));
   }
 
   @override
@@ -181,7 +181,7 @@ class _$_TodoItem extends _TodoItem with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   _$$_TodoItemCopyWith<_$_TodoItem> get copyWith =>
       __$$_TodoItemCopyWithImpl<_$_TodoItem>(this, _$identity);
 
@@ -251,7 +251,7 @@ class _$TodoCreateRequestCopyWithImpl<$Res, $Val extends TodoCreateRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? title = null,
@@ -289,7 +289,7 @@ class __$$_TodoCreateRequestCopyWithImpl<$Res>
       _$_TodoCreateRequest _value, $Res Function(_$_TodoCreateRequest) _then)
       : super(_value, _then);
 
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? title = null,
@@ -325,16 +325,16 @@ class _$_TodoCreateRequest
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return "TodoCreateRequest(title: $title, order: $order)";
+    return 'TodoCreateRequest(title: $title, order: $order)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "TodoCreateRequest"))
-      ..add(DiagnosticsProperty("title", title))
-      ..add(DiagnosticsProperty("order", order));
+      ..add(DiagnosticsProperty('type', 'TodoCreateRequest'))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('order', order));
   }
 
   @override
@@ -352,7 +352,7 @@ class _$_TodoCreateRequest
 
   @JsonKey(ignore: true)
   @override
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   _$$_TodoCreateRequestCopyWith<_$_TodoCreateRequest> get copyWith =>
       __$$_TodoCreateRequestCopyWithImpl<_$_TodoCreateRequest>(
           this, _$identity);
@@ -418,7 +418,7 @@ class _$TodoUpdateRequestCopyWithImpl<$Res, $Val extends TodoUpdateRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? title = freezed,
@@ -461,7 +461,7 @@ class __$$_TodoUpdateRequestCopyWithImpl<$Res>
       _$_TodoUpdateRequest _value, $Res Function(_$_TodoUpdateRequest) _then)
       : super(_value, _then);
 
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? title = freezed,
@@ -504,17 +504,17 @@ class _$_TodoUpdateRequest
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return "TodoUpdateRequest(title: $title, completed: $completed, order: $order)";
+    return 'TodoUpdateRequest(title: $title, completed: $completed, order: $order)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty("type", "TodoUpdateRequest"))
-      ..add(DiagnosticsProperty("title", title))
-      ..add(DiagnosticsProperty("completed", completed))
-      ..add(DiagnosticsProperty("order", order));
+      ..add(DiagnosticsProperty('type', 'TodoUpdateRequest'))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('completed', completed))
+      ..add(DiagnosticsProperty('order', order));
   }
 
   @override
@@ -534,7 +534,7 @@ class _$_TodoUpdateRequest
 
   @JsonKey(ignore: true)
   @override
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   _$$_TodoUpdateRequestCopyWith<_$_TodoUpdateRequest> get copyWith =>
       __$$_TodoUpdateRequestCopyWithImpl<_$_TodoUpdateRequest>(
           this, _$identity);

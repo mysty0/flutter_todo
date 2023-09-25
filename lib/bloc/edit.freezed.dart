@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of "edit.dart";
+part of 'edit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,7 +12,7 @@ part of "edit.dart";
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    "It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods");
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$EditState {
@@ -44,7 +44,7 @@ class _$EditStateCopyWithImpl<$Res, $Val extends EditState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? editingItem = freezed,
@@ -63,7 +63,7 @@ class _$EditStateCopyWithImpl<$Res, $Val extends EditState>
   }
 
   @override
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   $TodoItemCopyWith<$Res>? get editingItem {
     if (_value.editingItem == null) {
       return null;
@@ -96,7 +96,7 @@ class __$$_EditStateCopyWithImpl<$Res>
       _$_EditState _value, $Res Function(_$_EditState) _then)
       : super(_value, _then);
 
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? editingItem = freezed,
@@ -127,7 +127,7 @@ class _$_EditState implements _EditState {
 
   @override
   String toString() {
-    return "EditState(editingItem: $editingItem, loading: $loading)";
+    return 'EditState(editingItem: $editingItem, loading: $loading)';
   }
 
   @override
@@ -145,7 +145,7 @@ class _$_EditState implements _EditState {
 
   @JsonKey(ignore: true)
   @override
-  @pragma("vm:prefer-inline")
+  @pragma('vm:prefer-inline')
   _$$_EditStateCopyWith<_$_EditState> get copyWith =>
       __$$_EditStateCopyWithImpl<_$_EditState>(this, _$identity);
 }

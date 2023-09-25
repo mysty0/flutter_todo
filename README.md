@@ -21,3 +21,8 @@ To run tests:
 ```sh
 flutter test .\test\widget_test.dart
 ```
+
+To regenerate models and routes:
+```sh
+dart run build_runner build
+```

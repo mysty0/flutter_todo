@@ -80,34 +80,6 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class TodoListError extends StatelessWidget {
-  const TodoListError({
-    super.key,
-    required this.error,
-  });
-
-  final String error;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          "Unknown error happened, please try later",
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-        const SizedBox(height: 10),
-        Text(
-          "Error details $error",
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        const SizedBox(height: 10),
-        FilledButton(onPressed: () {}, child: const Text("Refresh"))
-      ],
-    );
-  }
-}
-
 class TodoListBody extends StatelessWidget {
   const TodoListBody({
     super.key,
